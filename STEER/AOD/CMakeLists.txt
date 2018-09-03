@@ -48,6 +48,7 @@ set(SRCS
     AliAODJetEventBackground.cxx
     AliAODMCHeader.cxx
     AliAODMCParticle.cxx
+    AliAODMLpidUtil.cxx
     AliAODPhoton.cxx
     AliAODPid.cxx
     AliAODpidUtil.cxx

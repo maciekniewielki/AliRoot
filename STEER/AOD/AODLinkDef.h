@@ -60,6 +60,7 @@
 #pragma link C++ class AliAODDiJet+;
 #pragma link C++ class AliAODMCParticle+;
 #pragma link C++ class AliAODMCHeader+;
+#pragma link C++ class AliAODMLpidUtil+;
 #pragma link C++ class AliAODPWG4Particle+;
 #pragma link C++ class AliAODPWG4ParticleCorrelation+;
 #pragma link C++ class AliAODDimuon+;

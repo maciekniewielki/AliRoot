@@ -20,6 +20,7 @@ class TH2F;
 class AliMCEvent;
 class AliAODpidUtil;
 class AliPIDResponse;
+class AliAODMLpidUtil;
 
 
 class AliAODInputHandler : public AliInputEventHandler {
@@ -68,6 +69,9 @@ class AliAODInputHandler : public AliInputEventHandler {
     virtual AliPIDResponse* GetPIDResponse() {return (AliPIDResponse*)fAODpidUtil;}
     virtual void CreatePIDResponse(Bool_t isMC=kFALSE);
     AliAODpidUtil *GetAODpidUtil() const { return fAODpidUtil; }
+    //ML PID
+    void SetMLpidUtil(AliAODMLpidUtil* util) {fAODMLpidUtil = util; }
+    AliAODMLpidUtil *GetMLpidUtil() const { return fAODMLpidUtil; }
   
  private:
     void ConnectFriends();
@@ -78,6 +82,7 @@ class AliAODInputHandler : public AliInputEventHandler {
     AliMCEvent     *fMCEvent; //!<! Pointer to the MCEvent
     TList          *fFriends; ///< List of friend trees
     AliAODpidUtil  *fAODpidUtil; //!<! Pointer to PID information
+    AliAODMLpidUtil  *fAODMLpidUtil; //!<! Pointer to machine learning PID information
   
 // Support for merged events
     Bool_t          fMergeEvents;     ///< Flag for event merging
@@ -95,7 +100,7 @@ class AliAODInputHandler : public AliInputEventHandler {
     AliAODEvent    *fAODEventToMerge; //!<! Event for merging
     Int_t           fMergeOffset;     //!<! Event offset for merging
     TH2F*           fHistStatistics[2]; //!<! how many events are cut away why {all,bin 0}
-    ClassDef(AliAODInputHandler, 4);
+    ClassDef(AliAODInputHandler, 5);
 };
 
 #endif

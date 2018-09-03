@@ -18,6 +18,7 @@ class AliVCuts;
 class AliRunTag;
 class AliEventTag;
 class AliPIDResponse;
+class AliAODMLpidUtil;
 class AliMCEvent;
 
 class AliInputEventHandler : public AliVEventHandler {
@@ -83,6 +84,10 @@ class AliInputEventHandler : public AliVEventHandler {
     //PID response
     virtual AliPIDResponse* GetPIDResponse() {return 0x0;}
     virtual void CreatePIDResponse(Bool_t /*isMC*/=kFALSE) {;}
+
+    //ML PID
+    virtual void SetMLpidUtil(AliAODMLpidUtil* util) {; }
+    virtual AliAODMLpidUtil *GetMLpidUtil() const { return 0x0; }
 
  protected:
     void SwitchOffBranches() const;
