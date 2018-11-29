@@ -1,38 +1,18 @@
 #include "AliAODMLpidUtil.h"
 
 
-//Perfection
-long inline combine(int i, int j){return (long) i << 32 | j;}
-
-AliAODMLpidUtil::AliAODMLpidUtil()
+void AliAODMLpidUtil::addPIDResponse(int trackID, AliMLPIDResponse* response)
 {
-    this->currentEventID = 0;
+    this->responses[trackID] = response;
 }
 
-//Setters
-void AliAODMLpidUtil::addPIDResponse(int trackID, int eventID, AliMLPIDResponse* response)
-{
-    this->addPIDResponse(combine(trackID, eventID), response);
-}
-
-void AliAODMLpidUtil::addPIDResponse(long key, AliMLPIDResponse* response)
-{
-    this->responses[key] = response;
-}
-
-//Getters
 AliMLPIDResponse* AliAODMLpidUtil::getTrackPIDResponse(int trackID)
 {
-    return this->getTrackPIDResponse(trackID, this->currentEventID);
+    return this->responses[trackID];
 }
 
-AliMLPIDResponse* AliAODMLpidUtil::getTrackPIDResponse(int trackID, int eventID)
+void AliAODMLpidUtil::clearResponses()
 {
-    return getTrackPIDResponse(combine(trackID, eventID));
+    for (auto&& p : this->responses) {delete p.second;}
+    this->responses.clear();
 }
-
-AliMLPIDResponse* AliAODMLpidUtil::getTrackPIDResponse(long key)
-{
-    return this->responses[key];
-}
-

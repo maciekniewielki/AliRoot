@@ -13,26 +13,15 @@ typedef struct
 
 class AliAODMLpidUtil
 {
-    //Number of the currently processed event (calculated before any cuts)
-    int currentEventID;
-    //Hashmap to store PID responses. The key is a concatenated (trackNumber, eventNumber) pair;
-    std::unordered_map<long, AliMLPIDResponse*> responses;
+    //Hashmap to store PID responses. The key is the uniqueID variable of the track
+    std::unordered_map<int, AliMLPIDResponse*> responses;
 
     public:
-    //Constructors/Destructors
-    AliAODMLpidUtil();
     
-    //Setters
-    void incrementEventID() {++currentEventID;}
-    void setEventID(int eventID) {currentEventID=eventID;}
-
-    void addPIDResponse(int trackID, int eventID, AliMLPIDResponse*);
-    void addPIDResponse(long key, AliMLPIDResponse* response);
-    
-    //Getters
+    void addPIDResponse(int trackID, AliMLPIDResponse* response);
     AliMLPIDResponse* getTrackPIDResponse(int trackID);
-    AliMLPIDResponse* getTrackPIDResponse(int trackID, int eventID);
-    AliMLPIDResponse* getTrackPIDResponse(long key);
+
+    void clearResponses();
 };
 
 #endif //ALIAODMLPIDUTIL_H
